@@ -9,23 +9,46 @@
 #   4. In Repo Settings → Pages → Custom domain, set "aurumxgold.app".
 #   5. Wait ~5 minutes for the Let's Encrypt cert to issue.
 
-title: AurumX Legal
-description: Privacy Policy, Terms, Responsible Play, and Licenses for AurumX.
+title: AurumX
+description: AurumX legal — privacy, terms, responsible play, licenses.
 url: https://aurumxgold.app
 
-# Theme is plain — these are legal docs, not a marketing site.
-theme: minima
+# Custom layout in _layouts/default.html — warm-black background,
+# gold accents, Cormorant serif headlines, Inter body. Mirrors the
+# iOS app's visual language so users tapping "Privacy Policy" land
+# somewhere that feels like the same brand.
+#
+# Don't set `theme:` here — that pulls in minima's CSS which would
+# fight ours. The custom layout + SCSS handles everything.
 
 # Pretty URLs: privacy.md → /privacy (no .html extension)
 permalink: /:title
 
-# Don't try to build the rest of the AurumX repo as a Jekyll site.
+# Apply our custom layout to every page/post by default so we don't
+# have to put `layout: default` in the front matter of every .md.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Plugins GitHub Pages supports without extra setup.
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Markdown engine
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Don't try to build the rest of the AurumX repo as a Jekyll site
+# (only relevant when serving from a subdirectory of a bigger repo).
 exclude:
   - "**/*.tsx"
   - "**/*.ts"
   - "**/*.json"
   - node_modules
-  - assets
   - app
   - components
   - lib

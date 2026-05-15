@@ -1,0 +1,332 @@
+---
+# Front matter required so Jekyll processes the SCSS.
+---
+
+/*
+  AurumX legal site — visual theme matched to the iOS app:
+    - Warm near-black background with a subtle gold radial glow at top
+    - Cormorant Light serif for headlines (matches AuthBrand)
+    - Inter for body, semibold for emphasis
+    - Gold accent (#C8A94A) on links, rules, callouts
+    - Generous line-height for legal-doc readability
+
+  The whole layout is a single column, max ~720px wide. No nav,
+  no clutter — just the document.
+*/
+
+:root {
+  /* Mirror constants/theme.ts in the app — palette parity matters
+     when users tap "Privacy Policy" inside the app and land here. */
+  --bg:        #0B0907;
+  --bg-edge:   #050302;
+  --surface:   #14110D;
+  --border:    #2A2520;
+  --border-2:  #3A3128;
+  --txt:       #F0EDE6;
+  --mut:       #6F665D;
+  --mut-2:     #948A7E;
+  --gold:      #C8A94A;
+  --gold-2:    #E8CC6A;
+  --grn:       #6FAE5B;
+  --red:       #C6584E;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ─── halo: soft gold radial glow behind the brand mark ────────── */
+.halo {
+  position: fixed;
+  top: -240px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(200, 169, 74, 0.18) 0%,
+    rgba(200, 169, 74, 0.05) 35%,
+    rgba(0, 0, 0, 0) 65%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ─── header / brand mark ──────────────────────────────────────── */
+.brand {
+  text-align: center;
+  padding: 64px 24px 28px;
+}
+.brand-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+.brand-mark {
+  font-family: 'Cormorant', Georgia, serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.5em;
+  color: rgba(240, 237, 230, 0.85);
+}
+.brand-rule {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--gold) 50%,
+    transparent 100%
+  );
+  opacity: 0.65;
+}
+
+/* ─── main page container ──────────────────────────────────────── */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 24px 80px;
+}
+
+/* ─── typography ───────────────────────────────────────────────── */
+h1 {
+  font-family: 'Cormorant', Georgia, serif;
+  font-weight: 300;
+  font-size: 56px;
+  letter-spacing: 0.01em;
+  color: var(--txt);
+  margin: 0 0 28px;
+  line-height: 1.05;
+}
+h2 {
+  font-family: 'Cormorant', Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  margin-top: 56px;
+  margin-bottom: 14px;
+  color: var(--gold-2);
+  letter-spacing: 0.005em;
+}
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 32px;
+  margin-bottom: 10px;
+  color: rgba(232, 204, 106, 0.85);
+}
+p {
+  margin: 0 0 16px;
+  color: rgba(240, 237, 230, 0.92);
+}
+strong {
+  color: var(--txt);
+  font-weight: 600;
+}
+em {
+  color: rgba(240, 237, 230, 0.78);
+  font-style: italic;
+}
+
+/* ─── links ────────────────────────────────────────────────────── */
+a {
+  color: var(--gold-2);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232, 204, 106, 0.35);
+  padding-bottom: 1px;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+a:hover {
+  border-color: var(--gold-2);
+  color: #fff;
+}
+
+/* ─── lists ────────────────────────────────────────────────────── */
+ul, ol {
+  padding-left: 22px;
+  margin: 0 0 18px;
+}
+li {
+  margin-bottom: 8px;
+  color: rgba(240, 237, 230, 0.92);
+}
+li::marker {
+  color: var(--gold);
+}
+
+/* ─── code & inline mono ───────────────────────────────────────── */
+code {
+  font-family: 'SF Mono', Menlo, 'Roboto Mono', monospace;
+  background: rgba(200, 169, 74, 0.08);
+  border: 1px solid rgba(200, 169, 74, 0.18);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: var(--gold-2);
+}
+pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin: 18px 0;
+}
+pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: rgba(240, 237, 230, 0.88);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ─── tables ───────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+}
+th {
+  background: rgba(200, 169, 74, 0.08);
+  color: var(--gold-2);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(42, 37, 32, 0.6);
+  vertical-align: top;
+  color: rgba(240, 237, 230, 0.92);
+}
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover td { background: rgba(200, 169, 74, 0.03); }
+
+/* ─── blockquote (used for ⚠️ legal review callouts) ──────────── */
+blockquote {
+  margin: 22px 0;
+  padding: 14px 18px;
+  background: rgba(198, 88, 78, 0.06);
+  border: 1px solid rgba(198, 88, 78, 0.28);
+  border-left: 3px solid var(--red);
+  border-radius: 8px;
+  font-size: 14px;
+  color: rgba(240, 237, 230, 0.86);
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote strong { color: var(--red); }
+
+/* ─── horizontal rules ─────────────────────────────────────────── */
+hr {
+  margin: 40px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── TL;DR section gets a special gold-tinted card ───────────── */
+.page h2 + p:has(+ h2),
+.page h2[id*="tl-dr"] + p {
+  font-size: 16px;
+  color: rgba(240, 237, 230, 0.88);
+  line-height: 1.7;
+}
+
+/* Auto-style the FIRST paragraph after the H1 of every page as a
+   lead paragraph (markdown doesn't give us a class hook). */
+.page > h1 + p {
+  font-family: 'Cormorant', Georgia, serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.6;
+  color: rgba(240, 237, 230, 0.78);
+  letter-spacing: 0.005em;
+  margin-bottom: 24px;
+}
+
+/* ─── footer ───────────────────────────────────────────────────── */
+.foot {
+  max-width: 720px;
+  margin: 60px auto 40px;
+  padding: 36px 24px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.foot-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+.foot-links a {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mut-2);
+  border-bottom: 0;
+}
+.foot-links a:hover {
+  color: var(--gold-2);
+}
+.foot-mark {
+  font-family: 'Cormorant', Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--mut);
+  margin-bottom: 8px;
+}
+.foot-glyph {
+  color: var(--gold);
+  margin-right: 6px;
+}
+.foot-contact a {
+  font-size: 12px;
+  color: var(--mut);
+  border-bottom: 0;
+}
+.foot-contact a:hover {
+  color: var(--gold-2);
+}
+
+/* ─── responsive tweaks ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  body { font-size: 14.5px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 23px; margin-top: 44px; }
+  h3 { font-size: 13px; }
+  .brand { padding: 40px 20px 24px; }
+  .page { padding: 20px 18px 60px; }
+  table { font-size: 13px; }
+  th, td { padding: 10px 11px; }
+  .foot { margin-top: 40px; }
+  .foot-links { gap: 14px; }
+}
