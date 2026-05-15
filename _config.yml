@@ -1,0 +1,33 @@
+# Jekyll config for GitHub Pages hosting of the four legal pages.
+# Treat this directory as a standalone site under aurumxgold.app.
+#
+# Once the domain is registered:
+#   1. Push the `legal/` directory to a public GitHub repo (or
+#      configure this repo for Pages from /legal).
+#   2. Repo Settings → Pages → set source to this directory.
+#   3. Add a CNAME record at your registrar: aurumxgold.app → <user>.github.io
+#   4. In Repo Settings → Pages → Custom domain, set "aurumxgold.app".
+#   5. Wait ~5 minutes for the Let's Encrypt cert to issue.
+
+title: AurumX Legal
+description: Privacy Policy, Terms, Responsible Play, and Licenses for AurumX.
+url: https://aurumxgold.app
+
+# Theme is plain — these are legal docs, not a marketing site.
+theme: minima
+
+# Pretty URLs: privacy.md → /privacy (no .html extension)
+permalink: /:title
+
+# Don't try to build the rest of the AurumX repo as a Jekyll site.
+exclude:
+  - "**/*.tsx"
+  - "**/*.ts"
+  - "**/*.json"
+  - node_modules
+  - assets
+  - app
+  - components
+  - lib
+  - supabase
+  - scripts
